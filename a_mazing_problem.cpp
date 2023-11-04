@@ -9,16 +9,13 @@ int main(){
     int **arr;
     arr = new int*[h+2];
     for(int i=0;i<h+2;i++) arr[i] = new int[w+2];
+
     int t;
-    for(int i=1;i<h+1;i++){
-        for(int j=1;j<w+1;j++){
-            cin >> t;
-            arr[i][j] = t;
-        }
-    }
     for(int i=0;i<h+2;i++){
         for(int j=0;j<w+2;j++){
-            if(i==0 || i==h+1 || j==0 || j==w+1) arr[i][j] = 1;
+            if(i==0 || i==h+1 || j==0 || j==w+1) t = 1;
+            else cin >> t;
+            arr[i][j] = t;
         }
     }
     bool exit = true;
