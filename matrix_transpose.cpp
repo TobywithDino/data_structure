@@ -1,25 +1,31 @@
 #include <iostream>
 using namespace std;
 
+struct matrix{
+    int row;
+    int column;
+    matrix* next;
+};
+
+void insert(matrix* m, int row, int column){
+    matrix* tmp;
+    tmp = m;
+
+    matrix* node = new matrix{row, column, nullptr};
+    while(m->next != nullptr){
+        m = m->next;
+    }
+    m->next = node;
+
+    m = tmp;
+}
+
+void initializeMatrix(matrix* m){
+    int row = m->row;
+    int column = m->column;
+    
+}
+
 int main(){
-    int x;
-    cin >> x;
-    int m,n;
-    cin >> m >> n;
-    int *arr;
-    arr = new int[m];
-    for(int i=0;i<m;i++) arr[i] = 0;
-    int a,b;
-    for(int i=0;i<x;i++){
-        cin >> a >> b;
-        arr[a-1]++;
-    }
-    int startPos = 1;
-    cout << startPos;
-    for(int i=0;i<m-1;i++){
-        startPos+=arr[i];
-        cout << " " << startPos;
-    }
-    cout << endl;
-    delete[] arr;
+    matrix *a = new matrix{6,6,nullptr};
 }
