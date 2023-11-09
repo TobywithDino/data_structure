@@ -1,0 +1,12 @@
+matrix transpose.
+polynomial.
+binary search.
+selection sort.
+bubble sort.
+insertion sort.
+permutation.
+Pre, Post, in-fix conversion.
+A Mazing Problem.
+linked list.
+stack using linked list.
+queue using linked list.
