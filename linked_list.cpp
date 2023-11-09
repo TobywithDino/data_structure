@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 typedef struct node *nodePtr;
@@ -41,7 +42,7 @@ void insert(nodePtr *ptr, int pos, int data)
         *ptr = tmp->link;
 }
 
-void pop(nodePtr *ptr, int pos)
+void del(nodePtr *ptr, int pos)
 {
     nodePtr tmp = new node;
     tmp->link = *ptr;
@@ -51,6 +52,34 @@ void pop(nodePtr *ptr, int pos)
     }
     nodePtr n = tmp->link;
     tmp->link = tmp->link->link;
+    delete n;
+}
+
+void push(nodePtr *ptr, int data)
+{
+    if (!*ptr)
+    {
+        *ptr = new node{data, nullptr};
+        return;
+    }
+    nodePtr tmp = *ptr;
+    while (tmp->link)
+    {
+        tmp = tmp->link;
+    }
+    tmp->link = new node{data, nullptr};
+}
+
+void pop(nodePtr *ptr)
+{
+    nodePtr tmp = new node;
+    tmp->link = *ptr;
+    while (tmp->link->link)
+    {
+        tmp = tmp->link;
+    }
+    nodePtr n = tmp->link;
+    tmp->link = nullptr;
     delete n;
 }
 
@@ -79,17 +108,29 @@ void invert(nodePtr *ptr)
     *ptr = middle;
 }
 
+void sortList(nodePtr *ptr)
+{
+}
+
 int main()
 {
     nodePtr ptr = new node;
     ptr = nullptr;
-    insert(&ptr, 0, 3);
-    insert(&ptr, 1, 5);
-    insert(&ptr, 1, 7);
-    insert(&ptr, 3, 8);
-    insert(&ptr, 0, 1);
-    pop(&ptr, 2);
-    showList(ptr);
-    invert(&ptr);
+    // insert(&ptr, 0, 3);
+    // insert(&ptr, 1, 5);
+    // insert(&ptr, 1, 7);
+    // insert(&ptr, 3, 8);
+    // insert(&ptr, 0, 1);
+    // del(&ptr, 2);
+    // showList(ptr);
+    // invert(&ptr);
+    // showList(ptr);
+
+    push(&ptr, 1);
+    push(&ptr, 2);
+    push(&ptr, 3);
+    push(&ptr, 4);
+    push(&ptr, 5);
+    pop(&ptr);
     showList(ptr);
 }
