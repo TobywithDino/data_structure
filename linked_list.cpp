@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 typedef struct node *nodePtr;
@@ -85,6 +86,7 @@ void pop(nodePtr *ptr)
 
 void showList(nodePtr ptr)
 {
+    printf("=========\n");
     while (ptr != nullptr)
     {
         printf("%d\n", ptr->data);
@@ -108,7 +110,73 @@ void invert(nodePtr *ptr)
     *ptr = middle;
 }
 
-void sortList(nodePtr *ptr)
+bool compareNode(nodePtr a, nodePtr b)
+{
+    int aData = a->data;
+    int bData = b->data;
+    return a > b;
+}
+
+void sortList_vector(nodePtr *ptr)
+{
+    vector<nodePtr> v;
+    while (*ptr)
+    {
+        v.push_back(*ptr);
+        *ptr = (*ptr)->link;
+    }
+    sort(v.begin(), v.end(), compareNode);
+    for (int i = 0; i < v.size(); i++)
+    {
+        push(ptr, v[i]->data);
+    }
+}
+
+void sortList_bubble(nodePtr *ptr)
+{
+    nodePtr i = *ptr;
+    nodePtr j = i;
+    while (i)
+    {
+        while (j)
+        {
+            if (i->data < j->data)
+            {
+                int tmp = i->data;
+                i->data = j->data;
+                j->data = tmp;
+            }
+            j = j->link;
+        }
+        i = i->link;
+        j = i;
+    }
+}
+
+void sortList_selection(nodePtr *ptr)
+{
+    nodePtr i = *ptr;
+    nodePtr j = i;
+    while (i)
+    {
+        nodePtr max = i;
+        while (j)
+        {
+            if (max->data < j->data)
+            {
+                max = j;
+            }
+            j = j->link;
+        }
+        int tmp = i->data;
+        i->data = max->data;
+        max->data = tmp;
+        i = i->link;
+        j = i;
+    }
+}
+
+void sortList_insertion(nodePtr *ptr)
 {
 }
 
@@ -126,11 +194,18 @@ int main()
     // invert(&ptr);
     // showList(ptr);
 
-    push(&ptr, 1);
-    push(&ptr, 2);
-    push(&ptr, 3);
-    push(&ptr, 4);
-    push(&ptr, 5);
-    pop(&ptr);
+    int n;
+    cin >> n;
+    int tmp;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> tmp;
+        push(&ptr, tmp);
+    }
+    showList(ptr);
+    // sortList_vector(&ptr);
+    // sortList_bubble(&ptr);
+    // sortList_selection(&ptr);
+    // sortList_insertion(&ptr);
     showList(ptr);
 }
